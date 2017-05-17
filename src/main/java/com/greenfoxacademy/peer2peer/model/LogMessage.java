@@ -11,5 +11,9 @@ import javax.persistence.*;
 @Setter
 public class LogMessage {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
+
 
 }
