@@ -15,5 +15,7 @@ public class LogMessage {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
+  private String message;
+
 
 }
