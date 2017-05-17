@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
     <title>P2P</title>
 </head>
 <body>
     <h1>Peer to peer Chat program</h1>
-    <a href="\enter">Enter Chat</a>
+    <a href="/enter">Enter Chat</a>
+    <form th:class="add" th:each="temp :${userName}" th:action="@{/enter}" method="post">
+        <span>Enter your username: </span><input type="text" th:value="${temp.name}" th:name="name"/>
+        <input type="submit" value="Enter"/>
+    </form>
 </body>
 </html>

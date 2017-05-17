@@ -23,15 +23,23 @@ public class MainController {
     return "index";
   }
 
-  @RequestMapping(value = "/enter")
-  public String enter(@RequestParam(name = "name", required = false) String name){
-    userNameRepository.save(new UserName("App", " Hi there! Submit your message using the send button!"));
-    userNameRepository.save(new UserName(name));
-    return "send";
+  @RequestMapping(value = "/show")
+  public String show(Model model) {
+    model.addAttribute("userName", userNameRepository.findAll());
+    return "index";
   }
 
-  @RequestMapping(value = "/message")
-  public String send(@RequestParam(name = "message", required = false) String message, @RequestParam(name="id", required = false) long id) {
+  @RequestMapping(value = "/enter")
+  public String enter(Model model, @RequestParam(name = "name", required = false) String name){
+    model.addAttribute("userName", userNameRepository.findAll());
+    userNameRepository.save(new UserName("App", " Hi there! Submit your message using the send button!"));
+    userNameRepository.save(new UserName(name));
+    return "enter";
+  }
+
+  @RequestMapping(value = "/list")
+  public String send(Model model, @RequestParam(name = "message", required = false) String message, @RequestParam(name="id", required = false) Long id) {
+    model.addAttribute("userName", userNameRepository.findAll());
     userNameRepository.findOne(id).setMessage(message);
     return "send";
   }
