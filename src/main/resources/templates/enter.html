@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Enter</title>
+</head>
+<body>
+    <h1>Enter</h1>
+    <form th:class="add" th:action="@{/enter}" method="post">
+       <span>Enter your username: </span><input type="text" th:name="name"  />
+        <input type="submit" value="Enter"/>
+    </form>
+</body>
+</html>

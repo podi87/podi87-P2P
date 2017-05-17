@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Log")
@@ -14,8 +15,10 @@ public class LogMessage {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-
+  private String path;
+  private LocalDateTime localDateTime;
   private String message;
+  private String Loglevel;
 
 
 }
