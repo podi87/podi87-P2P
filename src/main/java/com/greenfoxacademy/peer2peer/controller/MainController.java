@@ -39,11 +39,11 @@ public class MainController {
     model.addAttribute("users", userNameRepository.findAll());
     model.addAttribute("messages", messageRepository.findAllByOrderByTimestampAsc());
     model.addAttribute("actualName", userNameRepository.findOne(1l));
-//    if(env.equals("INFO")){
-//      logging(new LogMessage(" / ", " GET ", ""));
-//    } else if (env.equals("ERROR")){
-//      System.err.println();
-//    }
+    if(env.equals("INFO")){
+      logging(new LogMessage(" / ", " GET ", ""));
+    } else if (env.equals("ERROR")){
+      System.err.println();
+    }
     if (userNameRepository.count()==0) {
       return "enter";
     } else {
@@ -64,11 +64,11 @@ public class MainController {
       userNameRepository.save(new UserName(newName));
       temp = "redirect:/";
     }
-//    if(env.equals("INFO")){
-//      logging(new LogMessage(" /enter", " POST ", "newName: " + newName));
-//    } else if (env.equals("ERROR")){
-//      System.err.println();
-//    }
+    if(env.equals("INFO")){
+      logging(new LogMessage(" /enter", " POST ", "newName: " + newName));
+    } else if (env.equals("ERROR")){
+      System.err.println();
+    }
    return temp;
   }
 
@@ -76,11 +76,11 @@ public class MainController {
   public String update(Model model, @RequestParam(name = "id") long id, @RequestParam(name = "changedName") String changedName){
     userNameRepository.findOne(id).setName(changedName);
     userNameRepository.save(userNameRepository.findOne(id));
-//    if(env.equals("INFO")){
-//      logging(new LogMessage(" /update", " POST ", "changedName: " + changedName));
-//    } else if (env.equals("ERROR")){
-//      System.err.println();
-//    }
+    if(env.equals("INFO")){
+      logging(new LogMessage(" /update", " POST ", "changedName: " + changedName));
+    } else if (env.equals("ERROR")){
+      System.err.println();
+    }
     return "redirect:/";
   }
 
