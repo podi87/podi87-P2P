@@ -7,14 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "logmessage")
 @Getter
 @Setter
 public class LogMessage {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
   private String path;
