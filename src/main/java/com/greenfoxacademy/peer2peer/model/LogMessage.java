@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Log")
+@Table(name = "logmessage")
 @Getter
 @Setter
 public class LogMessage {
