@@ -9,9 +9,13 @@ import com.greenfoxacademy.peer2peer.repository.MessageRepository;
 import com.greenfoxacademy.peer2peer.repository.UserNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class RESTController {
+
+  private String envUrl = System.getenv("CHAT_APP_PEER_ADDRESS") + "/api/message/receive";
+  private String envID = System.getenv("CHAT_APP_UNIQUE_ID");
 
   @Autowired
   UserNameRepository userNameRepository;
@@ -25,6 +29,8 @@ public class RESTController {
   public Status postMessage(@RequestBody() Received received) {
     if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null){
       messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
+      RestTemplate restTemplate = new RestTemplate();
+      restTemplate.postForObject(envUrl, received, Ok.class);
       return new Ok(validatorService.validator(received));
     } else {
       return new Error("error", validatorService.validator(received));
