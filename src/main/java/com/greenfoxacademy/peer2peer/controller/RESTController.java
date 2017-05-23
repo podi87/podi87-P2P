@@ -27,15 +27,13 @@ public class RESTController {
   @CrossOrigin("*")
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
   public Status postMessage(@RequestBody() Received received) {
-    if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null){
+    if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null && !received.getClient().getId().equals(envID)) {
       messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
       RestTemplate restTemplate = new RestTemplate();
       restTemplate.postForObject(envUrl, received, Ok.class);
       return new Ok(validatorService.validator(received));
-    } else {
+      } else {
       return new Error("error", validatorService.validator(received));
     }
   }
-
-
 }
