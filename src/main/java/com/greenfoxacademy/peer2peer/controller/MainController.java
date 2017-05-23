@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
-
-
   @Autowired
   private UserNameRepository userNameRepository;
   @Autowired
@@ -37,6 +35,8 @@ public class MainController {
 
   @RequestMapping(value = "/")
   public String start(Model model) {
+    System.out.println(userNameRepository.count());
+
     model.addAttribute("users", userNameRepository.findAll());
     model.addAttribute("messages", messageRepository.findAllByOrderByTimestampAsc());
     model.addAttribute("actualName", userNameRepository.findOne(1l));
