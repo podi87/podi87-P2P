@@ -18,18 +18,15 @@ public class UserName {
   @Column(name = "Names")
   private String name;
 
-  @Column(name = "Messages")
-  private String message;
-
-  public UserName(String name, String message) {
-    this.name = name;
-    this.message = message;
-  }
-
   public UserName(String name) {
     this.name = name;
   }
 
   public UserName() {
+  }
+
+  @Override
+  public String toString() {
+    return name;
   }
 }

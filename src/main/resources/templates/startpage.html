@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>P2P</title>
+</head>
+<body>
+    <h1>Peer to peer Chat program</h1>
+    <form method="post" th:action="@{/update?id=} + ${1}">
+        <span>You can change your username here: </span>
+        <input type="text" th:value="${actualName}" th:name="changedName"/>
+        <input type="submit" value="Update"/>
+    </form>
+    <p></p>
+    <ul th:each="temp : ${messages}" >
+        <li th:text = "${temp.username}"></li>
+        <span th:text="${temp.text}"></span>
+    </ul>
+    <form th:class="send" th:action="@{/send?id=} + ${1}" method="post">
+        <input th:class="sendbox" type="text"  th:name="message"/>
+        <input type="submit" value="Send"/>
+    </form>
+<a href="/">Refresh</a>
+</body>
+</html>

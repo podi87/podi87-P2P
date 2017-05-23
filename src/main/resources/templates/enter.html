@@ -6,8 +6,9 @@
 </head>
 <body>
     <h1>Enter</h1>
+    <p th:text="${error}"></p>
     <form th:class="add" th:action="@{/enter}" method="post">
-       <span>Enter your username: </span><input type="text" th:name="name"/>
+       <span>Enter your username: </span><input type="text" th:name="newName"/>
         <input type="submit" value="Enter"/>
     </form>
 </body>
