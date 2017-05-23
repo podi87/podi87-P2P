@@ -1,6 +1,7 @@
 package com.greenfoxacademy.peer2peer.controller;
 
 
+import com.greenfoxacademy.peer2peer.Service.ValidatorService;
 import com.greenfoxacademy.peer2peer.model.LogMessage;
 import com.greenfoxacademy.peer2peer.model.Message;
 import com.greenfoxacademy.peer2peer.model.UserName;
@@ -23,6 +24,8 @@ public class MainController {
   private UserNameRepository userNameRepository;
   @Autowired
   private MessageRepository messageRepository;
+  @Autowired
+  private ValidatorService validatorService;
 
  public String error = "";
   String env = System.getenv("CHAT_APP_LOGLEVEL");
