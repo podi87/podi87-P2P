@@ -28,7 +28,8 @@ public class RESTController {
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
   public Status postMessage(@RequestBody() Received received) {
     if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null && !received.getClient().getId().equals(envID)) {
-      messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
+//      messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
+      timestampFilter(received);
       RestTemplate restTemplate = new RestTemplate();
       restTemplate.postForObject(envUrl, received, Ok.class);
       return new Ok(validatorService.validator(received));
@@ -36,4 +37,14 @@ public class RESTController {
       return new Error("error", validatorService.validator(received));
     }
   }
+
+  public void timestampFilter(Received received) {
+    for (long i = 0; i < messageRepository.count(); i++) {
+      if (received.getMessage().getTimestamp() != messageRepository.findOne(i).getTimestamp()) {
+        messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
+      }
+    }
+  }
+
+
 }
