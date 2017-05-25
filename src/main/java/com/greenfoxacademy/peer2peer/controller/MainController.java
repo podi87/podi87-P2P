@@ -87,7 +87,7 @@ public class MainController {
   @RequestMapping(value = "/send", method = RequestMethod.POST)
   public String chatPost(Model model, @RequestParam(name = "message") String message, @RequestParam(name = "id") long id) {
     Message receivedMessage = new Message(userNameRepository.findOne(id).getName(), message);
-    if (receivedMessage.getText().equals("")) {
+    if (!receivedMessage.getText().equals("")) {
       messageRepository.save(receivedMessage);
     }
     RestTemplate restTemplate = new RestTemplate();
