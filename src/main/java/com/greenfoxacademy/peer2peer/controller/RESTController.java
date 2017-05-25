@@ -27,7 +27,7 @@ public class RESTController {
   @CrossOrigin("*")
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
   public Status postMessage(@RequestBody() Received received) {
-    if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null && !received.getClient().getId().equals(envID)) {
+    if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null && !received.getClient().getId().equals(envID) || received.getMessage().getText().equals("")) {
       messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
       RestTemplate restTemplate = new RestTemplate();
       restTemplate.postForObject(envUrl, received, Ok.class);
@@ -36,14 +36,7 @@ public class RESTController {
       return new Error("error", validatorService.validator(received));
     }
   }
-
-//  public void timestampFilter(Received received) {
-//    for (long i = 0; i < messageRepository.count(); i++) {
-//      if (received.getMessage().getTimestamp() != messageRepository.findOne(i).getTimestamp()) {
-//        messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
-//      }
-//    }
-//  }
+  
 
 
 }
