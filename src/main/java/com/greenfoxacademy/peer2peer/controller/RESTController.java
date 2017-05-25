@@ -27,7 +27,7 @@ public class RESTController {
   @CrossOrigin("*")
   @RequestMapping(value = "/api/message/receive", method = RequestMethod.POST)
   public Status postMessage(@RequestBody() Received received) {
-    if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null && !received.getClient().getId().equals(envID) && !received.getMessage().getText().equals("")) {
+    if (received.getMessage().getUsername()!=null && received.getMessage().getText()!=null && !received.getClient().getId().equals(envID)) {
       messageRepository.save(new Message(received.getMessage().getUsername(), received.getMessage().getText()));
       RestTemplate restTemplate = new RestTemplate();
       restTemplate.postForObject(envUrl, received, Ok.class);
