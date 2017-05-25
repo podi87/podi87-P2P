@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -17,14 +18,14 @@ public class Message {
 
   private String username;
   private String text;
-  private long timestamp;
+  private Timestamp timestamp;
 
 
   public Message(String username, String text) {
     this.id = generateId();
     this.username = username;
     this.text = text;
-    this.timestamp = new Date().getTime()/1000;
+    this.timestamp = new Timestamp(System.currentTimeMillis());
   }
 
   public Message() {
